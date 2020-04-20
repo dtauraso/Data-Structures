@@ -7,7 +7,10 @@ class LRUCache:
     to every node stored in the cache.
     """
     def __init__(self, limit=10):
-        pass
+        self.size = limit if limit else 0
+        # dict = {key : (key, value)}  (key, value) is the node
+        self.storage = {}
+        # pass
 
     """
     Retrieves the value associated with the given key. Also
@@ -17,6 +20,13 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
+        # if the key exists
+            # pull the key from front()
+            # insert it into end
+            # return node.value
+        # if the key doesn't exist
+            # return None
+            
         pass
 
     """
@@ -30,4 +40,12 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
+
+        # if key is already in the cache
+            # if not already at the end
+                # take it and move it to the end
+        # if the key is new (its considered the most reciently used item)
+            # append it at the end
+            # if no room
+                # replace old node with new value
         pass
