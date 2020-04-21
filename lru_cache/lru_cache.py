@@ -16,7 +16,6 @@ class LRUCache:
         # dict = {key : {key: value}}  {key: value} is the node
         self.storage = DoublyLinkedList()
         self.quick_access = {}
-        # pass
 
     """
     Retrieves the value associated with the given key. Also
