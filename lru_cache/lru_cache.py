@@ -1,3 +1,8 @@
+import sys
+sys.path.append('./doubly_linked_list')
+from doubly_linked_list import DoublyLinkedList
+
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -7,9 +12,10 @@ class LRUCache:
     to every node stored in the cache.
     """
     def __init__(self, limit=10):
-        self.size = limit if limit else 0
-        # dict = {key : (key, value)}  (key, value) is the node
-        self.storage = {}
+        self.limit = limit
+        # dict = {key : value}  value is the node
+        self.storage = DoublyLinkedList()
+        self.quick_access = {}
         # pass
 
     """
@@ -20,14 +26,29 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
+        
+        # if key in self.storage:
+        #     self.storage[key].
+        # else:
         # if the key exists
-            # pull the key from front()
-            # insert it into end
+            # move_to_end(node)
+                # pull the key from front()
+                # insert it into end
+
             # return node.value
         # if the key doesn't exist
             # return None
-            
-        pass
+
+        # (key, value) has just been acessed so must be moved to the end
+        if key in self.quick_access:
+            # doesn't moving the item require a new link from the dict?
+            self.storage.move_to_end(self.quick_access[key])
+            self.quick_access[key] = self.storage.tail
+
+            return self.quick_access[key].value
+        else:
+            return None
+        # pass
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -41,11 +62,35 @@ class LRUCache:
     """
     def set(self, key, value):
 
-        # if key is already in the cache
-            # if not already at the end
-                # take it and move it to the end
         # if the key is new (its considered the most reciently used item)
             # append it at the end
             # if no room
                 # replace old node with new value
-        pass
+        # pass
+
+        if key not in self.quick_access:
+            
+            # if there is room
+            if len(self.storage) < self.limit:
+                # append it at the end
+                self.storage.add_to_tail(value)
+                self.quick_access[key] = self.storage.tail
+            else:
+                # no roomt so erase the last item and append it at end
+                self.storage.delete(self.storage.tail)
+
+                self.storage.add_to_tail(value)
+                self.quick_access[key] = self.storage.tail
+        else:
+            # key already exists so move it from it's old location to the end
+            # while updating the value
+            self.storage.delete(self.quick_access[key])
+            self.storage.add_to_tail(value)
+            self.quick_access[key] = self.storage.tail
+
+        # if key is already in the cache
+            # if not already at the end
+                # take it and move it to the end
+    def Print(self):
+        print()
+        {print(i, self.quick_access[i].value) for i in self.quick_access}
