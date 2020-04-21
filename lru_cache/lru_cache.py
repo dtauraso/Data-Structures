@@ -78,9 +78,6 @@ class LRUCache:
             self.storage.add_to_tail({'key': key, 'value': value})
             self.quick_access[key] = self.storage.tail
 
-        # if key is already in the cache
-            # if not already at the end
-                # take it and move it to the end
     def Print(self):
         print()
         print('quick access')
