@@ -27,3 +27,8 @@ class Stack:
     def len(self):
         return self.size
         # pass
+    def Print(self):
+        tracker = self.storage.head
+        while tracker:
+            print(tracker.value)
+            tracker = tracker.next
