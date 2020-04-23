@@ -10,7 +10,7 @@ class BinarySearchTree:
         self.left = None
         self.right = None
     def __str__(self):
-        return f'{self.value}\n'
+        return f'{self.value}'
     # Insert the given value into the tree
     def insert(self, value):
         if self is None:
@@ -22,7 +22,7 @@ class BinarySearchTree:
             else:
                 self.left = BinarySearchTree(value)
 
-        elif value > self.value:
+        elif value >= self.value:
             if self.right:
                 self.right.insert(value)
             else:
@@ -81,6 +81,7 @@ class BinarySearchTree:
     # You may use a recursive or iterative approach
     def for_each(self, cb):
 
+        # the root node is self
         node = self
 
         my_stack = Stack()
@@ -105,17 +106,39 @@ class BinarySearchTree:
         if not node:
             return
         if node:
-            in_order_print(node.left)
+            self.in_order_print(node.left)
             print(node)
-            in_order_print(node.right)
+            self.in_order_print(node.right)
 
-
-        # pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+
+        my_queue = Queue()
+
+        my_queue.enqueue(node)
+        while(my_queue.len() > 0):
+            tracker = my_queue.dequeue()
+            print(tracker)
+            # print(tracker.left, tracker.right)
+            # print()
+
+            if tracker.left:
+                my_queue.enqueue(tracker.left)
+            if tracker.right:
+                my_queue.enqueue(tracker.right)
+
+        # print('1\n8\n5\n7\n3\n6\n4\n2')
+        # while queue exists
+            # get head
+            # if head is none
+                # continue
+            # print head
+            
+            # add head's children to end of queue
+
+        # pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
@@ -125,32 +148,65 @@ class BinarySearchTree:
         my_stack = Stack()
 
         while my_stack.len() > 0 or node:
-            # top = my_stack.pop()
+            # if our tracker exists push it to stack and reassign it to the left
             if node:
+                print(node)
+
                 my_stack.push(node)
                 node = node.left
+            # if our tracker is null pop off from stack and use it for the tracker to visit the right
             else:
                 node = my_stack.pop()
-                print(node)
                 node = node.right
+            # print('stack start')
+            # my_stack.Print()
+            # print('stack end')
 
         # pass
+    def make_spaces(self, number):
+        if number == 0:
+            return ''
+        else:
+            return ' ' + self.make_spaces(number - 1)
+
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
-
+        if not node:
+            return
+        if node:
+            print(node)
+            self.pre_order_dft(node.left)
+            self.pre_order_dft(node.right)
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
+        if not node:
+            return
+        if node:
+            self.post_order_dft(node.left)
+            self.post_order_dft(node.right)
+            print(node)
 
-# x = BinarySearchTree(5)
 
+# x = BinarySearchTree(1)
+
+# # x.insert(6)
+# # x.insert(7)
+# # x.insert(8)
+# # x.insert(9)
+# x.insert(8)
+# x.insert(5)
+# x.insert(7)
 # x.insert(6)
-# tracker = x
-# x.dft_print(tracker)
+# x.insert(3)
+# x.insert(4)
+# x.insert(2)
 
-# print('here')
+# tracker = x
+# print()
+# x.bft_print(tracker)
+
+# # print('here')

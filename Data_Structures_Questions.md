@@ -41,6 +41,10 @@ Answer the following questions for each of the data structures you implemented a
     O(1) if max heap, O(log(n)) if min heap (must travel to rightmost node if min yeap)
 ## Doubly Linked List
 
+    Assume we already found the node
+    if we have to find the node then we get O(n) for all of the searching
+    the below function might use
+
 1. What is the runtime complexity of `ListNode.insert_after`?
     O(1)
 
