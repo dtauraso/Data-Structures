@@ -23,9 +23,11 @@ class BinarySearchTreeTests(unittest.TestCase):
         self.assertEqual(self.bst2.right.value, 1)
 
     def test_contains(self):
+
         self.bst.insert(2)
         self.bst.insert(3)
         self.bst.insert(7)
+
         self.assertTrue(self.bst.contains(7))
         self.assertFalse(self.bst.contains(8))
 
@@ -86,6 +88,8 @@ class BinarySearchTreeTests(unittest.TestCase):
         sys.stdout = io.StringIO()
         self.bst.bft_print(self.bst)
         output = sys.stdout.getvalue()
+        # print("my output", output)
+
         self.assertTrue(output == "1\n8\n5\n3\n7\n2\n4\n6\n" or
                         output == "1\n8\n5\n7\n3\n6\n4\n2\n")
 
